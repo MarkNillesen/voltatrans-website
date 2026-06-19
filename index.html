@@ -14,6 +14,12 @@
     .service-card:hover { border-color: #E85D1A; transform: translateY(-2px); }
     .case-card { transition: transform 0.2s; }
     .case-card:hover { transform: translateY(-3px); }
+    .hero-bg {
+      background-image: linear-gradient(to right, rgba(26,43,74,0.97) 45%, rgba(26,43,74,0.6)),
+        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-900 font-sans">
@@ -31,7 +37,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="bg-[#1A2B4A] text-white px-8 py-24 grid md:grid-cols-2 gap-12 items-center">
+  <section class="hero-bg text-white px-8 py-24 grid md:grid-cols-2 gap-12 items-center">
     <div>
       <p class="text-xs uppercase tracking-widest text-orange-500 mb-4">Logistiek & Transport</p>
       <h1 class="text-4xl md:text-5xl font-medium leading-tight mb-6">
@@ -125,9 +131,7 @@
     <p class="text-gray-500 text-sm leading-relaxed max-w-lg mb-10">Een greep uit onze samenwerkingen met B2B-klanten in diverse sectoren.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="case-card bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <div class="h-44 bg-[#1A2B4A] flex items-center justify-center">
-          <i class="ti ti-meat text-white/20 text-6xl"></i>
-        </div>
+        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&q=80" alt="Voedingsindustrie" class="w-full h-44 object-cover" />
         <div class="p-5">
           <span class="text-xs text-orange-600 bg-orange-50 px-3 py-1 rounded-full">Voedingsindustrie</span>
           <h3 class="font-medium text-sm mt-3 mb-2">ADM Foods — Europese distributie</h3>
@@ -135,9 +139,7 @@
         </div>
       </div>
       <div class="case-card bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <div class="h-44 bg-[#2D4A1E] flex items-center justify-center">
-          <i class="ti ti-building-factory text-white/20 text-6xl"></i>
-        </div>
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Bouw" class="w-full h-44 object-cover" />
         <div class="p-5">
           <span class="text-xs text-orange-600 bg-orange-50 px-3 py-1 rounded-full">Bouw & Techniek</span>
           <h3 class="font-medium text-sm mt-3 mb-2">NovaBouw — projectlogistiek</h3>
@@ -145,9 +147,7 @@
         </div>
       </div>
       <div class="case-card bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <div class="h-44 bg-[#3D1A1A] flex items-center justify-center">
-          <i class="ti ti-car text-white/20 text-6xl"></i>
-        </div>
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Automotive" class="w-full h-44 object-cover" />
         <div class="p-5">
           <span class="text-xs text-orange-600 bg-orange-50 px-3 py-1 rounded-full">Automotive</span>
           <h3 class="font-medium text-sm mt-3 mb-2">T-Core — just-in-time levering</h3>
@@ -193,6 +193,11 @@
     </div>
   </section>
 
+  <!-- Over ons foto -->
+  <div class="px-8 pb-20">
+    <img src="https://images.unsplash.com/photo-1471958680802-1345a694ba6d?w=1200&q=80" alt="VoltaTrans vloot" class="w-full h-64 object-cover rounded-xl" />
+  </div>
+
   <!-- CTA banner -->
   <div class="bg-orange-600 px-8 py-14 flex flex-col md:flex-row items-center justify-between gap-6">
     <h2 class="text-2xl md:text-3xl font-medium text-white max-w-lg">Klaar om uw logistiek naar het volgende niveau te brengen?</h2>
@@ -229,4 +234,3 @@
 
 </body>
 </html>
-
