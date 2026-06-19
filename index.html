@@ -4,233 +4,326 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VoltaTrans — Slimme logistiek voor groeiende bedrijven</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     html { scroll-behavior: smooth; }
-    .nav-link { transition: color 0.2s; }
-    .nav-link:hover { color: #E85D1A; }
-    .service-card { transition: border-color 0.2s, transform 0.2s; }
-    .service-card:hover { border-color: #E85D1A; transform: translateY(-2px); }
-    .case-card { transition: transform 0.2s; }
-    .case-card:hover { transform: translateY(-3px); }
-    .hero-bg {
+    body { font-family: 'Segoe UI', sans-serif; color: #111; }
+
+    /* Nav */
+    .navbar { background: #fff; border-bottom: 1px solid #f0f0f0; padding: 1rem 2rem; }
+    .navbar-brand { font-size: 18px; font-weight: 500; color: #111 !important; }
+    .navbar-brand span { color: #E85D1A; }
+    .nav-link { font-size: 14px; color: #888 !important; }
+    .nav-link:hover { color: #E85D1A !important; }
+    .btn-nav { font-size: 13px; padding: 8px 18px; background: #1A2B4A; color: #fff; border: none; border-radius: 4px; }
+    .btn-nav:hover { background: #223563; color: #fff; }
+
+    /* Hero */
+    .hero {
       background-image: linear-gradient(to right, rgba(26,43,74,0.97) 45%, rgba(26,43,74,0.6)),
         url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80');
-      background-size: cover;
-      background-position: center;
+      background-size: cover; background-position: center;
+      padding: 6rem 2rem; color: #fff;
     }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #E85D1A; margin-bottom: 1rem; }
+    .hero h1 { font-size: 42px; font-weight: 500; line-height: 1.2; margin-bottom: 1.5rem; }
+    .hero h1 em { color: #E85D1A; font-style: normal; }
+    .hero p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 2rem; max-width: 440px; }
+    .btn-primary-custom { padding: 12px 24px; background: #E85D1A; color: #fff; border: none; border-radius: 4px; font-size: 14px; text-decoration: none; }
+    .btn-primary-custom:hover { background: #cc4f15; color: #fff; }
+    .btn-outline-custom { padding: 12px 24px; border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 4px; font-size: 14px; text-decoration: none; }
+    .btn-outline-custom:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .hero-stats { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; }
+    .stat-num { font-size: 34px; font-weight: 500; color: #E85D1A; }
+    .stat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+    /* Clients */
+    .clients-bar { padding: 1.25rem 2rem; border-bottom: 1px solid #f0f0f0; }
+    .client-name { font-size: 13px; font-weight: 500; color: #ccc; }
+
+    /* Section */
+    .section-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #E85D1A; margin-bottom: 0.75rem; }
+    .section-title { font-size: 28px; font-weight: 500; margin-bottom: 0.75rem; }
+    .section-sub { font-size: 14px; color: #888; line-height: 1.8; max-width: 480px; margin-bottom: 2.5rem; }
+
+    /* Service cards */
+    .service-card { border: 1px solid #f0f0f0; border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+    .service-card:hover { border-color: #E85D1A; transform: translateY(-2px); }
+    .service-icon { width: 40px; height: 40px; background: #FEF0E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 20px; color: #E85D1A; }
+    .service-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 13px; color: #888; line-height: 1.6; margin: 0; }
+
+    /* Case cards */
+    .case-card { border: 1px solid #f0f0f0; border-radius: 12px; overflow: hidden; transition: transform 0.2s; background: #fff; }
+    .case-card:hover { transform: translateY(-3px); }
+    .case-card img { width: 100%; height: 180px; object-fit: cover; }
+    .case-body { padding: 1.25rem; }
+    .case-tag { font-size: 11px; color: #E85D1A; background: #FEF0E8; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem; }
+    .case-body h3 { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+    .case-body p { font-size: 13px; color: #888; line-height: 1.6; margin: 0; }
+
+    /* Feature boxes */
+    .feature-box { background: #f9f9f9; border: 1px solid #f0f0f0; border-radius: 12px; padding: 1.5rem; }
+    .feature-box h3 { font-size: 14px; font-weight: 500; margin-bottom: 0.4rem; }
+    .feature-box p { font-size: 12px; color: #888; margin: 0; line-height: 1.6; }
+
+    /* CTA */
+    .cta-banner { background: #E85D1A; padding: 4rem 2rem; }
+    .cta-banner h2 { font-size: 28px; font-weight: 500; color: #fff; }
+    .btn-white { padding: 12px 28px; background: #fff; color: #E85D1A; border: none; border-radius: 4px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; }
+    .btn-white:hover { background: #f5f5f5; color: #E85D1A; }
+
+    /* Contact */
+    .form-control { border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px 16px; font-size: 14px; }
+    .form-control:focus { border-color: #E85D1A; box-shadow: none; }
+    .btn-submit { padding: 12px 24px; background: #1A2B4A; color: #fff; border: none; border-radius: 8px; font-size: 14px; width: 100%; }
+    .btn-submit:hover { background: #223563; }
+    .contact-info { font-size: 14px; color: #888; }
+    .contact-info i { color: #E85D1A; font-size: 18px; }
+
+    /* Footer */
+    footer { border-top: 1px solid #f0f0f0; padding: 1.5rem 2rem; }
+
+    /* GSAP animation classes */
+    .fade-up { opacity: 0; transform: translateY(30px); }
   </style>
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body>
 
   <!-- Navigatie -->
-  <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 flex items-center justify-between px-8 py-4">
-    <div class="text-lg font-medium tracking-tight">Volta<span class="text-orange-600">Trans</span></div>
-    <ul class="hidden md:flex gap-8 list-none">
-      <li><a href="#diensten" class="nav-link text-sm text-gray-500">Diensten</a></li>
-      <li><a href="#cases" class="nav-link text-sm text-gray-500">Cases</a></li>
-      <li><a href="#over" class="nav-link text-sm text-gray-500">Over ons</a></li>
-      <li><a href="#contact" class="nav-link text-sm text-gray-500">Contact</a></li>
-    </ul>
-    <a href="#contact" class="text-sm px-5 py-2 bg-[#1A2B4A] text-white rounded hover:bg-[#223563] transition-colors">Offerte aanvragen</a>
+  <nav class="navbar navbar-expand-md sticky-top">
+    <div class="container-fluid px-2">
+      <a class="navbar-brand" href="#">Volta<span>Trans</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto me-4 gap-3">
+          <li class="nav-item"><a class="nav-link" href="#diensten">Diensten</a></li>
+          <li class="nav-item"><a class="nav-link" href="#cases">Cases</a></li>
+          <li class="nav-item"><a class="nav-link" href="#over">Over ons</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn-nav">Offerte aanvragen</a>
+      </div>
+    </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero-bg text-white px-8 py-24 grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <p class="text-xs uppercase tracking-widest text-orange-500 mb-4">Logistiek & Transport</p>
-      <h1 class="text-4xl md:text-5xl font-medium leading-tight mb-6">
-        Slimme logistiek voor <span class="text-orange-500">groeiende</span> bedrijven
-      </h1>
-      <p class="text-base text-white/70 leading-relaxed mb-8 max-w-md">
-        VoltaTrans verzorgt betrouwbaar transport door heel Europa. Van maatwerk planning tot real-time tracking — wij zorgen dat uw lading op tijd aankomt.
-      </p>
-      <div class="flex gap-4 flex-wrap">
-        <a href="#diensten" class="px-6 py-3 bg-orange-600 text-white rounded text-sm hover:bg-orange-700 transition-colors">Onze diensten</a>
-        <a href="#cases" class="px-6 py-3 border border-white/30 text-white rounded text-sm hover:bg-white/10 transition-colors">Cases bekijken</a>
-      </div>
-    </div>
-    <div class="bg-white/5 border border-white/10 rounded-xl p-8">
-      <div class="grid grid-cols-2 gap-4">
-        <div class="text-center py-6">
-          <div class="text-4xl font-medium text-orange-500">12+</div>
-          <div class="text-xs text-white/50 mt-1">Jaar ervaring</div>
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-md-6">
+          <p class="hero-eyebrow">Logistiek & Transport</p>
+          <h1>Slimme logistiek voor <em>groeiende</em> bedrijven</h1>
+          <p>VoltaTrans verzorgt betrouwbaar transport door heel Europa. Van maatwerk planning tot real-time tracking — wij zorgen dat uw lading op tijd aankomt.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#diensten" class="btn-primary-custom">Onze diensten</a>
+            <a href="#cases" class="btn-outline-custom">Cases bekijken</a>
+          </div>
         </div>
-        <div class="text-center py-6">
-          <div class="text-4xl font-medium text-orange-500">98%</div>
-          <div class="text-xs text-white/50 mt-1">Op tijd geleverd</div>
-        </div>
-        <div class="text-center py-6">
-          <div class="text-4xl font-medium text-orange-500">340+</div>
-          <div class="text-xs text-white/50 mt-1">Tevreden klanten</div>
-        </div>
-        <div class="text-center py-6">
-          <div class="text-4xl font-medium text-orange-500">18</div>
-          <div class="text-xs text-white/50 mt-1">Landen actief</div>
+        <div class="col-md-6">
+          <div class="hero-stats">
+            <div class="row text-center g-3">
+              <div class="col-6 py-3">
+                <div class="stat-num">12+</div>
+                <div class="stat-label">Jaar ervaring</div>
+              </div>
+              <div class="col-6 py-3">
+                <div class="stat-num">98%</div>
+                <div class="stat-label">Op tijd geleverd</div>
+              </div>
+              <div class="col-6 py-3">
+                <div class="stat-num">340+</div>
+                <div class="stat-label">Tevreden klanten</div>
+              </div>
+              <div class="col-6 py-3">
+                <div class="stat-num">18</div>
+                <div class="stat-label">Landen actief</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Klanten balk -->
-  <div class="flex items-center gap-8 px-8 py-5 border-b border-gray-100 overflow-x-auto">
-    <span class="text-xs text-gray-400 whitespace-nowrap">Onze klanten</span>
-    <div class="flex gap-10 items-center">
-      <span class="text-sm font-medium text-gray-300">HEBI Group</span>
-      <span class="text-sm font-medium text-gray-300">ADM Foods</span>
-      <span class="text-sm font-medium text-gray-300">T-Core Solutions</span>
-      <span class="text-sm font-medium text-gray-300">NovaBouw</span>
-      <span class="text-sm font-medium text-gray-300">Steelcraft B.V.</span>
-    </div>
+  <div class="clients-bar d-flex align-items-center gap-5 overflow-auto">
+    <span style="font-size:12px;color:#aaa;white-space:nowrap">Onze klanten</span>
+    <span class="client-name">HEBI Group</span>
+    <span class="client-name">ADM Foods</span>
+    <span class="client-name">T-Core Solutions</span>
+    <span class="client-name">NovaBouw</span>
+    <span class="client-name">Steelcraft B.V.</span>
   </div>
 
   <!-- Diensten -->
-  <section id="diensten" class="px-8 py-20">
-    <p class="text-xs uppercase tracking-widest text-orange-600 mb-3">Wat wij doen</p>
-    <h2 class="text-3xl font-medium mb-3">Diensten op maat</h2>
-    <p class="text-gray-500 text-sm leading-relaxed max-w-lg mb-10">
-      Of het nu gaat om een eenmalig transport of een structurele logistieke samenwerking — wij denken met u mee.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="service-card border border-gray-100 rounded-xl p-6">
-        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
-          <i class="ti ti-truck text-orange-600 text-xl"></i>
+  <section id="diensten" class="py-5 px-2">
+    <div class="container py-4">
+      <p class="section-eyebrow fade-up">Wat wij doen</p>
+      <h2 class="section-title fade-up">Diensten op maat</h2>
+      <p class="section-sub fade-up">Of het nu gaat om een eenmalig transport of een structurele logistieke samenwerking — wij denken met u mee.</p>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="ti ti-truck"></i></div>
+            <h3>Wegtransport</h3>
+            <p>Betrouwbaar wegvervoer door heel Europa, van volle vrachten tot groupage-zendingen.</p>
+          </div>
         </div>
-        <h3 class="font-medium text-sm mb-2">Wegtransport</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Betrouwbaar wegvervoer door heel Europa, van volle vrachten tot groupage-zendingen.</p>
-      </div>
-      <div class="service-card border border-gray-100 rounded-xl p-6">
-        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
-          <i class="ti ti-building-warehouse text-orange-600 text-xl"></i>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="ti ti-building-warehouse"></i></div>
+            <h3>Warehousing</h3>
+            <p>Flexibele opslagoplossingen met real-time voorraadbeheer en snelle orderverwerking.</p>
+          </div>
         </div>
-        <h3 class="font-medium text-sm mb-2">Warehousing</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Flexibele opslagoplossingen met real-time voorraadbeheer en snelle orderverwerking.</p>
-      </div>
-      <div class="service-card border border-gray-100 rounded-xl p-6">
-        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
-          <i class="ti ti-route text-orange-600 text-xl"></i>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="ti ti-route"></i></div>
+            <h3>Route-optimalisatie</h3>
+            <p>Slimme planning die kosten verlaagt en de doorlooptijd van uw logistiek verkort.</p>
+          </div>
         </div>
-        <h3 class="font-medium text-sm mb-2">Route-optimalisatie</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Slimme planning die kosten verlaagt en de doorlooptijd van uw logistiek verkort.</p>
-      </div>
-      <div class="service-card border border-gray-100 rounded-xl p-6">
-        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
-          <i class="ti ti-map-pin text-orange-600 text-xl"></i>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="ti ti-map-pin"></i></div>
+            <h3>Live tracking</h3>
+            <p>Altijd inzicht in uw zending via ons klantportaal, 24/7 beschikbaar.</p>
+          </div>
         </div>
-        <h3 class="font-medium text-sm mb-2">Live tracking</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Altijd inzicht in uw zending via ons klantportaal, 24/7 beschikbaar.</p>
       </div>
     </div>
   </section>
 
   <!-- Cases -->
-  <section id="cases" class="px-8 py-20 bg-gray-50">
-    <p class="text-xs uppercase tracking-widest text-orange-600 mb-3">Cases</p>
-    <h2 class="text-3xl font-medium mb-3">Wat we hebben gerealiseerd</h2>
-    <p class="text-gray-500 text-sm leading-relaxed max-w-lg mb-10">Een greep uit onze samenwerkingen met B2B-klanten in diverse sectoren.</p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="case-card bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&q=80" alt="Voedingsindustrie" class="w-full h-44 object-cover" />
-        <div class="p-5">
-          <span class="text-xs text-orange-600 bg-orange-50 px-3 py-1 rounded-full">Voedingsindustrie</span>
-          <h3 class="font-medium text-sm mt-3 mb-2">ADM Foods — Europese distributie</h3>
-          <p class="text-xs text-gray-500 leading-relaxed">Wekelijkse leveringen van gekoelde producten naar 8 landen, met een foutmarge van minder dan 0,5%.</p>
+  <section id="cases" class="py-5 px-2" style="background:#f9f9f9">
+    <div class="container py-4">
+      <p class="section-eyebrow fade-up">Cases</p>
+      <h2 class="section-title fade-up">Wat we hebben gerealiseerd</h2>
+      <p class="section-sub fade-up">Een greep uit onze samenwerkingen met B2B-klanten in diverse sectoren.</p>
+      <div class="row g-3">
+        <div class="col-md-4 fade-up">
+          <div class="case-card">
+            <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&q=80" alt="Voedingsindustrie" />
+            <div class="case-body">
+              <span class="case-tag">Voedingsindustrie</span>
+              <h3>ADM Foods — Europese distributie</h3>
+              <p>Wekelijkse leveringen van gekoelde producten naar 8 landen, met een foutmarge van minder dan 0,5%.</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="case-card bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Bouw" class="w-full h-44 object-cover" />
-        <div class="p-5">
-          <span class="text-xs text-orange-600 bg-orange-50 px-3 py-1 rounded-full">Bouw & Techniek</span>
-          <h3 class="font-medium text-sm mt-3 mb-2">NovaBouw — projectlogistiek</h3>
-          <p class="text-xs text-gray-500 leading-relaxed">Maatwerk transportplanning voor bouwmaterialen met strakke tijdvensters op de bouwplaats.</p>
+        <div class="col-md-4 fade-up">
+          <div class="case-card">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Bouw" />
+            <div class="case-body">
+              <span class="case-tag">Bouw & Techniek</span>
+              <h3>NovaBouw — projectlogistiek</h3>
+              <p>Maatwerk transportplanning voor bouwmaterialen met strakke tijdvensters op de bouwplaats.</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="case-card bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Automotive" class="w-full h-44 object-cover" />
-        <div class="p-5">
-          <span class="text-xs text-orange-600 bg-orange-50 px-3 py-1 rounded-full">Automotive</span>
-          <h3 class="font-medium text-sm mt-3 mb-2">T-Core — just-in-time levering</h3>
-          <p class="text-xs text-gray-500 leading-relaxed">Just-in-time leveringen voor een assemblagelijn in België — zero downtime in 18 maanden.</p>
+        <div class="col-md-4 fade-up">
+          <div class="case-card">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Automotive" />
+            <div class="case-body">
+              <span class="case-tag">Automotive</span>
+              <h3>T-Core — just-in-time levering</h3>
+              <p>Just-in-time leveringen voor een assemblagelijn in België — zero downtime in 18 maanden.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Over ons -->
-  <section id="over" class="px-8 py-20 grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <p class="text-xs uppercase tracking-widest text-orange-600 mb-3">Over ons</p>
-      <h2 class="text-3xl font-medium mb-4">Meer dan transport — een partner in logistiek</h2>
-      <p class="text-gray-500 text-sm leading-relaxed mb-4">
-        VoltaTrans is opgericht in 2012 vanuit Eindhoven. We begonnen klein, met één vrachtwagen en grote ambities. Inmiddels rijden onze chauffeurs door heel Europa en helpen we bedrijven in 18 landen.
-      </p>
-      <p class="text-gray-500 text-sm leading-relaxed">
-        Ons team van 45 mensen zet zich elke dag in voor betrouwbare, transparante en duurzame logistiek. We geloven dat goede logistiek begint bij eerlijke communicatie.
-      </p>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
-        <i class="ti ti-clock text-orange-600 text-2xl mb-3 block"></i>
-        <h3 class="font-medium text-sm mb-1">24/7 bereikbaar</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Ons team staat altijd klaar, ook buiten kantooruren.</p>
+  <section id="over" class="py-5 px-2">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-md-6 fade-up">
+          <p class="section-eyebrow">Over ons</p>
+          <h2 class="section-title">Meer dan transport — een partner in logistiek</h2>
+          <p style="font-size:14px;color:#888;line-height:1.8;margin-bottom:1rem">VoltaTrans is opgericht in 2012 vanuit Eindhoven. We begonnen klein, met één vrachtwagen en grote ambities. Inmiddels rijden onze chauffeurs door heel Europa en helpen we bedrijven in 18 landen.</p>
+          <p style="font-size:14px;color:#888;line-height:1.8">Ons team van 45 mensen zet zich elke dag in voor betrouwbare, transparante en duurzame logistiek. We geloven dat goede logistiek begint bij eerlijke communicatie.</p>
+        </div>
+        <div class="col-md-6">
+          <div class="row g-3">
+            <div class="col-6 fade-up"><div class="feature-box"><i class="ti ti-clock" style="color:#E85D1A;font-size:22px;margin-bottom:0.75rem;display:block"></i><h3>24/7 bereikbaar</h3><p>Ons team staat altijd klaar, ook buiten kantooruren.</p></div></div>
+            <div class="col-6 fade-up"><div class="feature-box"><i class="ti ti-leaf" style="color:#E85D1A;font-size:22px;margin-bottom:0.75rem;display:block"></i><h3>Duurzaam rijden</h3><p>30% van onze vloot rijdt elektrisch of op HVO100.</p></div></div>
+            <div class="col-6 fade-up"><div class="feature-box"><i class="ti ti-shield-check" style="color:#E85D1A;font-size:22px;margin-bottom:0.75rem;display:block"></i><h3>Volledig verzekerd</h3><p>Uw lading is altijd volledig gedekt, zonder kleine lettertjes.</p></div></div>
+            <div class="col-6 fade-up"><div class="feature-box"><i class="ti ti-users" style="color:#E85D1A;font-size:22px;margin-bottom:0.75rem;display:block"></i><h3>Vast aanspreekpunt</h3><p>Eén contactpersoon die uw situatie kent en medenkt.</p></div></div>
+          </div>
+        </div>
       </div>
-      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
-        <i class="ti ti-leaf text-orange-600 text-2xl mb-3 block"></i>
-        <h3 class="font-medium text-sm mb-1">Duurzaam rijden</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">30% van onze vloot rijdt elektrisch of op HVO100.</p>
-      </div>
-      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
-        <i class="ti ti-shield-check text-orange-600 text-2xl mb-3 block"></i>
-        <h3 class="font-medium text-sm mb-1">Volledig verzekerd</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Uw lading is altijd volledig gedekt, zonder kleine lettertjes.</p>
-      </div>
-      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
-        <i class="ti ti-users text-orange-600 text-2xl mb-3 block"></i>
-        <h3 class="font-medium text-sm mb-1">Vast aanspreekpunt</h3>
-        <p class="text-xs text-gray-500 leading-relaxed">Eén contactpersoon die uw situatie kent en medenkt.</p>
+      <div class="mt-5 fade-up">
+        <img src="https://images.unsplash.com/photo-1471958680802-1345a694ba6d?w=1200&q=80" alt="VoltaTrans vloot" class="w-100 rounded-3" style="height:280px;object-fit:cover" />
       </div>
     </div>
   </section>
 
-  <!-- Over ons foto -->
-  <div class="px-8 pb-20">
-    <img src="https://images.unsplash.com/photo-1471958680802-1345a694ba6d?w=1200&q=80" alt="VoltaTrans vloot" class="w-full h-64 object-cover rounded-xl" />
-  </div>
-
   <!-- CTA banner -->
-  <div class="bg-orange-600 px-8 py-14 flex flex-col md:flex-row items-center justify-between gap-6">
-    <h2 class="text-2xl md:text-3xl font-medium text-white max-w-lg">Klaar om uw logistiek naar het volgende niveau te brengen?</h2>
-    <a href="#contact" class="px-7 py-3 bg-white text-orange-600 font-medium rounded text-sm hover:bg-orange-50 transition-colors whitespace-nowrap">Neem contact op</a>
+  <div class="cta-banner">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+      <h2 class="mb-0 fade-up">Klaar om uw logistiek naar het volgende niveau te brengen?</h2>
+      <a href="#contact" class="btn-white fade-up">Neem contact op</a>
+    </div>
   </div>
 
   <!-- Contact -->
-  <section id="contact" class="px-8 py-20">
-    <p class="text-xs uppercase tracking-widest text-orange-600 mb-3">Contact</p>
-    <h2 class="text-3xl font-medium mb-3">Kom in contact</h2>
-    <p class="text-gray-500 text-sm leading-relaxed max-w-lg mb-10">Benieuwd wat VoltaTrans voor uw bedrijf kan betekenen? Neem gerust contact op — we reageren binnen één werkdag.</p>
-    <div class="grid md:grid-cols-2 gap-12 max-w-2xl">
-      <div class="flex flex-col gap-4">
-        <input type="text" placeholder="Uw naam" class="border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400" />
-        <input type="email" placeholder="E-mailadres" class="border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400" />
-        <input type="text" placeholder="Bedrijfsnaam" class="border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400" />
-        <textarea placeholder="Uw bericht" rows="4" class="border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400 resize-none"></textarea>
-        <button class="px-6 py-3 bg-[#1A2B4A] text-white rounded-lg text-sm hover:bg-[#223563] transition-colors">Verstuur bericht</button>
-      </div>
-      <div class="flex flex-col gap-4 text-sm text-gray-500">
-        <div class="flex items-center gap-3"><i class="ti ti-map-pin text-orange-600 text-lg"></i> Insulindelaan 200, Eindhoven</div>
-        <div class="flex items-center gap-3"><i class="ti ti-phone text-orange-600 text-lg"></i> +31 40 123 45 67</div>
-        <div class="flex items-center gap-3"><i class="ti ti-mail text-orange-600 text-lg"></i> info@voltatrans.nl</div>
-        <div class="flex items-center gap-3"><i class="ti ti-clock text-orange-600 text-lg"></i> Ma–Vr: 07:00 – 18:00</div>
+  <section id="contact" class="py-5 px-2">
+    <div class="container py-4">
+      <p class="section-eyebrow fade-up">Contact</p>
+      <h2 class="section-title fade-up">Kom in contact</h2>
+      <p class="section-sub fade-up">Benieuwd wat VoltaTrans voor uw bedrijf kan betekenen? Neem gerust contact op — we reageren binnen één werkdag.</p>
+      <div class="row g-5" style="max-width:700px">
+        <div class="col-md-7 fade-up">
+          <div class="d-flex flex-column gap-3">
+            <input type="text" class="form-control" placeholder="Uw naam" />
+            <input type="email" class="form-control" placeholder="E-mailadres" />
+            <input type="text" class="form-control" placeholder="Bedrijfsnaam" />
+            <textarea class="form-control" rows="4" placeholder="Uw bericht" style="resize:none"></textarea>
+            <button class="btn-submit">Verstuur bericht</button>
+          </div>
+        </div>
+        <div class="col-md-5 fade-up">
+          <div class="contact-info d-flex flex-column gap-3">
+            <div class="d-flex align-items-center gap-2"><i class="ti ti-map-pin"></i> Insulindelaan 200, Eindhoven</div>
+            <div class="d-flex align-items-center gap-2"><i class="ti ti-phone"></i> +31 40 123 45 67</div>
+            <div class="d-flex align-items-center gap-2"><i class="ti ti-mail"></i> info@voltatrans.nl</div>
+            <div class="d-flex align-items-center gap-2"><i class="ti ti-clock"></i> Ma–Vr: 07:00 – 18:00</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="px-8 py-6 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-2">
-    <div class="font-medium text-sm">Volta<span class="text-orange-600">Trans</span></div>
-    <span class="text-xs text-gray-400">© 2025 VoltaTrans B.V. — Eindhoven</span>
+  <footer class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div style="font-size:15px;font-weight:500">Volta<span style="color:#E85D1A">Trans</span></div>
+    <span style="font-size:12px;color:#aaa">© 2025 VoltaTrans B.V. — Eindhoven</span>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.fade-up').forEach(function(el) {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
